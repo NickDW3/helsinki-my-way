@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazer Chocolate Factory - Helsinki, My Way</title>
+        <meta name="description" content="A closer look at the Fazer Chocolate Factory in Helsinki, Finland, with video and audio.">
+        <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Skip link: Allows keyboard and screen reader users to skip directly to the main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Outer container wraps the entire page content and controls the max width -->
+    <div class="outer-container" id="top">
+
+        <header class="site-header">
+            <p class="eyebrow">Helsinki &mdash; 60.1699&deg; N</p>
+            <h1>Helsinki, My Way</h1>
+            <p class="tagline">A closer look: the Fazer Chocolate Factory</p>
+        </header>
+
+        <!-- Main site navigation: Links to different sections of the site, built as a styled unordered list for accessibility and semantic structure -->
+        <nav class="site-nav" aria-label="Main site navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="places.html" aria-current="page">Fazer Guide</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+
+            <article aria-labelledby="fazer-heading">
+                <h2 id="fazer-heading">Fazer Chocolate Factory</h2>
+
+                <!-- Textual description: a short history of the Fazer Chocolate Factory -->
+                <p>
+                    Founded in 1891 by Karl Fazer, Fazer is one of Finland's best known brands and a genuine piece of everyday Finnish culture &mdash; 
+                    the blue Fazer Sininen milk chocolate bar is a fixture in almost every Finnish kitchen cupboard. 
+                    The factory and visitor centre in Vantaa, just outside Helsinki, offers a close-up look at how the chocolate is made, 
+                    from roasting the cocoa beans to tempering and moulding the finished bars. 
+                    It's a place where tradition meets modernity, offering visitors a unique glimpse into the world of Finnish chocolate making.
+                    I visited recently and recorded some short clips of the tour, which you can watch in the video below. 
+                </p>
+
+                <!-- Video: A short video clip of the Fazer Chocolate Factory tour, with captions for accessibility -->
+                <section aria-labelledby="fazer-video-heading">
+                    <h3 id="fazer-video-heading">Video: Fazer Visitor Centre Tour</h3>
+                    <video controls width="480" poster="images/fazer.jpg">
+                        <source src="media/fazer-visit.mp4" type="video/mp4">
+                        <track kind="captions" src="media/fazer-visit-captions.vtt" srclang="en" label="English" default>
+                        <p>
+                        Your browser does not support embedded videos.
+                        You can <a href="media/fazer-visit.mp4">download the video</a> instead.
+                        </p>
+                    </video>
+                </section>
+
+                <!-- Audio: A short narrated clip discussing Fazer cafes in Helsinki, with a collapsible text transcript
+                    for accessibility (WebVTT captions are not rendered for <audio> in current browsers) -->
+                <section aria-labelledby="audio-heading">
+                    <h3 id="audio-heading">Audio: Fazer Cafes</h3>
+                    <audio controls>
+                        <source src="media/fazer-cafes.mp3" type="audio/mpeg">
+                        <p>
+                        Your browser does not support the audio element.
+                        You can <a href="media/fazer-cafes.mp3">download the audio</a> instead.
+                        </p>    
+                    </audio>
+
+                    <details>
+                        <summary>Read transcript</summary>
+                        <p>
+                            Fazer also has an excellent chain of cafes with seasonal Nordic pastries baked every day. 
+                            The cinnamon bun is the classic, but the chocolate Danish is my personal favourite.
+                            You also get a free chocolate with every coffee.
+                        </p>
+                    </details>
+                </section>
+
+                <!-- External resources: Links to external websites -->
+                <section aria-labelledby="external-resources-heading">
+                    <h3 id="external-resources-heading">Learn more &amp; plan a visit</h3>
+                    <ul class="external-resources">
+                        <li><a href="https://www.fazer.com" target="_blank" rel="noopener noreferrer">Fazer Official Website</a></li>
+                        <li><a href="https://www.myhelsinki.fi" target="_blank" rel="noopener noreferrer">My Helsinki Website</a></li>
+                        <li><a href="https://www.didrichsenmuseum.fi/en" target="_blank" rel="noopener noreferrer">Didrichsen Museum</a></li>
+                    </ul>
+                </section>
+
+            </article>
+
+            <!-- Previous/Next Navigation -->
+            <nav class="page-nav" aria-label="Page navigation">
+                <a href="index.html" rel="prev">&larr; Previous: Home</a>
+            </nav>
+
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Helsinki, My Way. All rights reserved.</p>
+            <a href="#top" class="back-to-top">Back to top</a>
+        </footer>
+
+    </div>
+
+</body>
+</html>

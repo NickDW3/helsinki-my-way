@@ -1,0 +1,413 @@
+/* 
+Helsinki, My Way - Stylesheet
+Shared by index.html and places.html
+The colour palette references Helsinki's public transport map:
+tram turquoise, metro orange and train purple, used as accent colours throughout the site.
+*/
+
+/* 1. Design tokens (custom properties): reusable colour, font and layout variables */
+:root {
+    --color-bg: #EEF1F0;                /* soft grey, Helsinki coastal mist background */
+    --color-surface: #FFFFFF;           /* white background for cards and content areas */
+    --color-ink: #14232B;               /* near black primary text colour */
+    --color-muted: #4A5A61;             /* softer variant of --color-ink for secondary text */
+    --color-line: #D7DBD9;              /* light line for borders and dividers */
+    --color-focus-on-dark: #FF8A4C;     /* brighter focus outline against dark background */
+
+    --color-tram: #006666;              /* Helsinki tram turquoise */
+    --color-metro: #A8481C;             /* Helsinki metro orange */
+    --color-train: #763f7f;             /* Helsinki train purple */
+
+    --font-display: Arial, "Helvetica Neue", Helvetica, sans-serif; /* bold sans-serif for headings and nav */
+    --font-body: Georgia, "Times New Roman", Times, serif;  /* serif for body text and captions */
+
+    --max-width: 1100px;                  /* maximum width for content */
+    --radius: 4px;                        /* border radius (curved corners) across UI elements */
+}
+
+/* 2. Base styles: browser reset (cross-browser consistency), scroll behaviour and default styling 
+    for body, images, links and focus states */
+
+* {
+    box-sizing: border-box; /* Padding and border included within element width, simplifying layout sizing */
+}
+
+html {
+    scroll-behavior: smooth;
+    overscroll-behavior-y: none; /* Prevents browser bouncing at the top and bottom of the page */
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+}
+
+a {
+    color: var(--color-metro);
+}
+
+/* Distinct colour on mouse hover and keyboard focus consistent with the nav's active page indicator */
+a:hover,
+a:focus-visible {
+    color: var(--color-tram);   
+}
+
+/* Visible keyboard focus for accessibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--color-tram);
+    outline-offset: 2px;
+}
+
+/* 3. Skip link: allows keyboard users to bypass navigation and jump to the main content. 
+    It is hidden by default and visible on focus */
+
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--color-ink);
+    color: var(--color-surface);
+    padding: 0.75em 1em;
+    z-index: 100;
+
+    /* Visually hidden until focussed: clipped to a single pixel rather than moved off the screen, 
+        to avoid a known focus-scroll flicker issue with large offset positioning */
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.skip-link:focus-visible {
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+    outline-color: var(--color-focus-on-dark);
+    color: var(--color-surface);
+}
+
+/* 4. Outer container: wraps the whole page, controlling maximum width and centring content */
+
+.outer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* 5. Header: typography for the site title, eyebrow label and tagline */
+
+.site-header {
+    padding: 2rem 0 1rem;
+    text-align: left;
+}
+
+/* Small uppercase label above the h1 */
+.eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-muted);
+    margin: 0 0 0.5rem;
+}
+
+.site-header h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.75rem;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--color-muted);
+    margin: 0.5rem 0 0;
+}
+
+/* 6. Navigation
+    Implemented as a styled HTML list, not a div, for accessibility.
+    A three colour scheme is used to reference the Helsinki public transport map, 
+    with tram turquoise, metro orange and train purple used as accent colours throughout the site */
+
+.site-nav {
+    position: sticky;   /* Keeps navigation visible when scrolling past the header */
+    top: 0;
+    z-index: 10;    /* Sits below the skip link, so the skip link is always visible when focused */
+    background: var(--color-bg);    /* Opaque, so it fully covers content scrolling underneath */
+    margin-top: 1.5rem;
+    padding-top: 0.25rem;
+}
+
+/* Thin route line signature, stretched to full viewport width */
+.site-nav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    height: 1px;
+    background: linear-gradient(
+        to right, 
+        var(--color-tram) 0 33%, 
+        var(--color-metro) 33% 66%, 
+        var(--color-train) 66% 100%
+    );
+}
+
+/* Thicker route line, stretched to full viewport width */
+.site-nav::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    height: 5px;
+    background: linear-gradient(
+        to right,
+        var(--color-tram) 0 33%, 
+        var(--color-metro) 33% 66%, 
+        var(--color-train) 66% 100%
+    );
+}
+
+.site-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.site-nav a {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-decoration: none;  
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0;
+    border-bottom: 3px solid transparent;
+}
+
+/* Orange on hover distinguishes from the turquoise current-page indicator below */
+.site-nav a:hover,
+.site-nav a:focus-visible {
+    border-bottom-color: var(--color-metro);
+}
+
+/* Highlight the current page in the nav */
+.site-nav a[aria-current="page"] {
+    border-bottom-color: var(--color-tram);
+    color: var(--color-tram);
+}   
+
+/* 7. Main content area: vertical spacing around the <main> landmark */
+
+main {
+    padding: 2rem 0 3rem;
+}
+
+/* Two-column layout for the landing page: intro text and gallery.
+    CSS grid with percentage-based fractions for responsive layout, with a gap between the columns */
+.two-column-layout {
+    display: grid;
+    grid-template-columns: 40% 56%;
+    gap: 4%;
+}
+
+/* Consistent heading typography across both pages' content sections */
+.intro h2,
+.gallery h2,
+article h2,
+article h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+/* 8. Photo gallery (landing page): two-column grid for arranging gallery images */
+
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-content: start;
+}
+
+/* Heading and intro text span the full grid width, sitting above the two-column photo grid */
+.gallery h2,
+.gallery > p {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+/* Card styling for each gallery photo */
+.gallery figure {
+    margin: 0;
+    background: var(--color-surface);
+    padding: 0.5rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+}
+
+.gallery figcaption {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-top: 0.5rem;
+}   
+
+/* 1:1 aspect ratio with object-fit: cover crops images to fill the square
+    without distortion regardless of source image shape */
+.gallery figure img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* 9. Fazer Guide page: article styled as a card, consistent with gallery figures; 
+    media sizing, transcript styling and link spacing */
+
+article {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: 2rem;
+}
+
+/* Vertical spacing between video, audio and links subsections */
+article section {
+    margin-top: 2rem;
+}
+
+/* Constrains media to a consistent width, matching the video's HTML width attribute */
+video,
+audio {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* Collapsible audio transcript, styled to match link colours since WebVTT captions are not
+    visibly rendered for <audio> elements in current browsers */
+details {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+summary {
+    cursor: pointer; 
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-metro);
+}
+
+summary:hover,
+summary:focus-visible {
+    color: var(--color-tram);
+}
+
+.external-resources {
+    list-style: square;
+    padding-left: 1.25rem;
+}
+
+.external-resources li {
+    margin-bottom: 0.5rem;
+}   
+
+/* 10. Footer: copyright text styling and the back-to-top link, with full viewport width top line */
+
+.site-footer {
+    position: relative;
+    padding: 1.5rem 0;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    text-align: center;
+}
+
+/* Top border line stretched to full viewport width */
+.site-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    height: 1px;
+    background: var(--color-line);
+}
+
+/* Styled to match the footer's small caps aesthetic; 
+    scrolls smoothly via html { scroll-behavior: smooth } */
+.back-to-top {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* 11. Responsive design for smaller screens 
+    Below 700px, the two-column layout stacks into a single column.
+    The photo gallery remains two columns at this width, since the full-width
+    single column still gives each photo card comfortable space */
+@media (max-width: 699px) {
+
+    .site-header h1 {
+        font-size: 2rem;
+    }   
+
+    .two-column-layout {
+        grid-template-columns: 100%;
+        gap: 2rem;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    article {
+        padding: 1.25rem; /* Reduced padding preserves content width on narrow screens */
+    }
+}
+
+/* Below 420px, the photo gallery also collapses to a single column, 
+    once even the full viewport width is too narrow for two comfortable cards */
+@media (max-width: 420px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    /* Smaller heading size prevents text-wrapping orphans on narrow screens */
+    .intro h2,
+    .gallery h2 {
+        font-size: 1.35rem;
+    }
+}
+
+/* Disables smooth scrolling for users who have indicated a preference for reduced motion,
+    since the gliding scroll motion can cause discomfort for motion-sensitive users */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
